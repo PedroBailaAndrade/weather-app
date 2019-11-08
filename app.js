@@ -4,6 +4,9 @@ window.addEventListener("load", () => {
   let locationName = document.querySelector(".location-name")
   let temperatureDescription = document.querySelector(".temperature-discription")
   let temperatureDegree = document.querySelector(".temperature-degree")
+  let icon = document.querySelector(".icon")
+  let temperatureSection = document.querySelector(".temperature")
+  const temperatureSpan = document.querySelector(".temperature span")
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
@@ -19,11 +22,24 @@ window.addEventListener("load", () => {
           console.log(data);
           const name = data.name;
           const {temp, humidity} = data.main;
-          const {main, description, icon} = data.weather["0"];
+          const {main, description} = data.weather["0"];
 
           temperatureDegree.textContent = temp;
           temperatureDescription.textContent = description;
           locationName.textContent = name;
+          icon.src = `https://openweathermap.org/img/w/${data.weather["0"].icon}.png`;
+
+          let fahrenheit = (temp * 9/5) + 32;
+
+          temperatureSection.addEventListener("click", () => {
+            if(temperatureSpan.textContent === "Cº") {
+              temperatureSpan.textContent = "Fº"
+              temperatureDegree.textContent = Math.floor(fahrenheit);
+            } else{
+              temperatureSpan.textContent = "Cº"
+              temperatureDegree.textContent = temp;
+            }
+          });
         });
     });
   }
