@@ -1,6 +1,10 @@
 // if (process.env.NODE_ENV !== 'production' ) {
 //   require('dotenv').config()
 // }
+//   require('dotenv').config()
+// }//   require('dotenv').config()
+// }
+
 
 const DARKSKY_API_KEY = process.env.DARKSKY_API_KEY
 const express = require('express')
